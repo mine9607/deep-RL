@@ -1,6 +1,6 @@
 # Install Dependencies
 
-Note there is a gpu enabled yml file and a cpu only yml file for non-accelerated machines
+> conda export -> creates an overly verbose .yml file and should not be used for install. Also, a simplified env.yml file doesn't work with both conda and pip dependencies. The correct solution should be to create a separate dependency file for conda and pip. First create the conda env from the conda file and then activate the environment before running the pip install script.
 
 ## Option 1 - Install Everything (env.yml)
 

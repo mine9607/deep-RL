@@ -1,0 +1,12 @@
+stable-baselines3==2.7.0
+gymnasium==1.2.0
+ale-py==0.11.2
+ray==2.49.2
+torchrl==0.10.0
+tensorboard==2.20.0
+matplotlib==3.10.6
+pandas==2.3.2
+opencv-python==4.12.0.88
+moviepy==2.2.1
+pytest==8.4.2
+mypy==1.18.2
