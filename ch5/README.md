@@ -45,5 +45,20 @@ The value of some state equals the value of the maximum action we can execute fr
 We can recursively (think walking a tree-structure) express Q(s,a) such as:
 
 $$
-Q(s,a) = r(s,a) + \gamma{max}Q(s', a')
+Q(s,a) = r(s,a) + \gamma \, \text{max} \, Q(s', a')
+$$
+
+Note: the value of terminal states (leaf nodes) is equal to their immediate reward (r_i) since they have no further actions that can move them to a new state.
+
+Example: Simple grid-like environment
+
+<img src='./simple_grid.png' height="300"/>
+
+Transition Diagram:
+<img src='./transition_diagram.png' height="300"/>
+
+For the diagram above the `action value Q(s,a)` for the up action is given by:
+
+$$
+Q(s_0, \text{up}) = 0.33 \cdot V_1 + 0.33 \cdot V_2 + 0.33 \cdot V_4 = 0.33 \cdot 1 + 0.33 \cdot 2 + 0.33 \cdot 4 = 2.31
 $$
