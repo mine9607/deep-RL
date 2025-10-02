@@ -15,18 +15,30 @@ import torchvision.utils as vutils
 from gymnasium import spaces
 from torch.utils.tensorboard.writer import SummaryWriter
 
+# Register gymnasium environments from secondary pip installs
 gym.register_envs(ale_py)
 
+# Setup Python root logger
+# NOTE--Log Levels: DEBUG, INFO, WARNING, ERROR, CRITICAL
+"""
+%(asctime)s -> timestamp of the log record
+%(levelname)s -> the level string, e.g. INFO, ERROR, etc
+%(message)s -> the actual log message
+"""
 logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(levelname)s -= %(message)s"
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
 )
 
+# Get a logger named after the current module (__name__) e.g. ("my_module")
+# Avoids every module writing to the root logger directly
 log = logging.getLogger(__name__)
-# log.min_level = gym.logger.INFO
 
+# DEFINE GLOBAL VARIABLES
 LATENT_VECTOR_SIZE = 100
-DISCR_FILTERS = 64
-GENER_FILTERS = 64
+DISCR_FILTERS = 64  # discriminator class
+GENER_FILTERS = 64  # generator class
 BATCH_SIZE = 16
 
 # dimension input image will be rescaled
@@ -119,7 +131,10 @@ class Discriminator(nn.Module):
 
     def forward(self, x):
         conv_out = self.conv_pipe(x)
-        return conv_out.view(-1, 1).squeeze(dim=1)
+        # -1 : automatically calculated dimension (based on total number of elements)
+        #  1 : second dimension of size 1
+        # .squeeze() : removes that dimension of size 1
+        return conv_out.flatten()
 
 
 class Generator(nn.Module):
