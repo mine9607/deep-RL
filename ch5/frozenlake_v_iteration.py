@@ -11,13 +11,15 @@ TEST_EPISODES = 20
 
 State = int
 Action = int
-RewardKey = tt.Tuple[State, Action, State]
-TransitKey = tt.Tuple[State, Action]
+RewardKey = tt.Tuple[State, Action, State]  # composite key for Reward Dicitonary
+TransitKey = tt.Tuple[State, Action]  # composite key for Transition Dictionary
+
+# Note: defaultdict behaves like a Python dictionary but provides a defatult value for missing keys--avoids KeyError
 
 
 class Agent:
     def __init__(self):
-        self.env = gym.make(ENV_NAME)
+        self.env = gym.make(ENV_NAME)  # agent instance creates a FrozenLake-v1 env
         self.state, _ = self.env.reset()
         self.rewards: tt.Dict[RewardKey, float] = defaultdict(float)
         self.transits: tt.Dict[TransitKey, Counter] = defaultdict(Counter)
