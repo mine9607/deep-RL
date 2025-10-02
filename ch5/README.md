@@ -104,7 +104,7 @@ The final value for state **s_0** is the maximum of the possible action values w
 2. For every state, s, in the MDP, perform the Bellman update:
 
 $$
-V_s \leftarrow \text{max} \sum{p_{a,s \rightarrow s'}(r_{s,a,s'} + \gamma \,V_{s'}}
+V_s \leftarrow \text{max} \sum{p_{a,s \rightarrow s'} \, (r_{s,a,s'} + \gamma \,V_{s'})}
 $$
 
 ## Q-iteration for Frozen Lake
