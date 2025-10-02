@@ -24,4 +24,4 @@ In the `deterministic` case we only consider the immediate reward + the value of
 
 In the `stochastic` case we simply introduce probability (p_i) that an action (a_i) will be taken to receive the immediate reward (r_i) and get to a state with value (V_i)
 
-<img src='./Stochastic_Bellman.png' height="50%"/>
+<img src='./Stochastic_Bellman.png' height="200"/>
