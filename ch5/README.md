@@ -24,4 +24,26 @@ In the `deterministic` case we only consider the immediate reward + the value of
 
 In the `stochastic` case we simply introduce probability (p_i) that an action (a_i) will be taken to receive the immediate reward (r_i) and get to a state with value (V_i)
 
-<img src='./Stochastic_Bellman.png' height="200"/>
+<img src='./Stochastic_Bellman.png' height="300"/>
+
+> NOTE: The long-term value of a state can be discounted. Similar to discounting EV of a project by discounting back to NPV. Essentially, this could be thought of similarly to the opportunity to implement 3 different oil and gas projects which have a probability of success an an expected cashflow which could be compared by discounting back to the current state.
+
+**Summary**: At every state the agent ends up in, it needs to select the action with the **_maximum expected reward_**--which is a sum of the immediate reward and the one-step discounted long-term reward.
+
+## Value of the Action
+
+The `value of the action` Q(s,a) -- is the total reward **V(s)** we can get by executing action _a_ in state _s_
+
+Since we always want to maximize this value we can define **V(s)** as the maximum available action value:
+
+$$
+V(s) = {max}Q(s,a)
+$$
+
+The value of some state equals the value of the maximum action we can execute from this state.
+
+We can recursively (think walking a tree-structure) express Q(s,a) such as:
+
+$$
+Q(s,a) = r(s,a) + \gamma{max}Q(s', a')
+$$
