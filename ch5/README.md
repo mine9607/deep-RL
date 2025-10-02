@@ -104,7 +104,17 @@ The final value for state **s_0** is the maximum of the possible action values w
 2. For every state, s, in the MDP, perform the Bellman update:
 
 $$
-V_s \leftarrow \text{max} \sum{p_{a,s \rightarrow s' \,} (r_{s,a,s'} + \gamma \,V_{s'})}
+V_s \leftarrow \text{max} \sum{p_{a,s \rightarrow s'} (r_{s,a,s'} + \gamma \,V_{s'})}
 $$
+
+3. Repeat step 2 for some large number of steps or until changes become too small
+
+> NOTE: The above is theoretical and has several limitations. The state space should be discrete and small enough to perform multiple iterations over all states
+
+We rarely known the transition probability for the actions and rewards matrix. What we usually have is just the history from the agent's interaction with the environment--however, we need both a reward for every transition and the probability of the transition to perform a Bellman update.
+
+To address this we use our agent's experience as an estimation for **BOTH** unknowns. Rewards can be used as they are and we track what reward we got on the transition from s0 to s1 using action a-- to estimate probabilities we can maintain counters for every tuple (s0, s1, a) to build a probability distribution (monte carlo) and normalize them.
+
+## Value Iteration in Practice
 
 ## Q-iteration for Frozen Lake
