@@ -52,13 +52,59 @@ Note: the value of terminal states (leaf nodes) is equal to their immediate rewa
 
 Example: Simple grid-like environment
 
-<img src='./simple_grid.png' height="300"/>
+<img src='./simple_grid.png' height="200"/>
 
 Transition Diagram:
+
 <img src='./transition_diagram.png' height="300"/>
 
-For the diagram above the `action value Q(s,a)` for the up action is given by:
+For the diagram above the `action values Q(s,a)` are given by:
 
 $$
 Q(s_0, \text{up}) = 0.33 \cdot V_1 + 0.33 \cdot V_2 + 0.33 \cdot V_4 = 0.33 \cdot 1 + 0.33 \cdot 2 + 0.33 \cdot 4 = 2.31
 $$
+
+$$
+Q(s_0, \text{left}) = 0.33 \cdot V_1 + 0.33 \cdot V_2 + 0.33 \cdot V_3 = 0.33 \cdot 1 + 0.33 \cdot 2 + 0.33 \cdot 3 = 1.98
+$$
+
+$$
+Q(s_0, \text{right}) = 0.33 \cdot V_4 + 0.33 \cdot V_1 + 0.33 \cdot V_3 = 0.33 \cdot 4 + 0.33 \cdot 1 + 0.33 \cdot 3 = 2.64
+$$
+
+$$
+Q(s_0, \text{down}) = 0.33 \cdot V_3 + 0.33 \cdot V_2 + 0.33 \cdot V_4 = 0.33 \cdot 3 + 0.33 \cdot 2 + 0.33 \cdot 4 = 2.97
+$$
+
+The final value for state **s_0** is the maximum of the possible action values which is **2.97**
+
+> Q-values are more convenient in practice--it's simpler for the agent to make decisions about actions based on Q than on V
+
+- In the case of Q--to choose the action based on state, the agent just needs to calculate Q for all available actions using the current state and choose the action with the largest value of Q.
+
+- To do the same using values of the states--the agent needs to know not only the values, but also the probabilities for transitions (which are rarely known in advance in practice)--which must be estimated for every action and state pair.
+
+# ??? THIS STATEMENT ABOVE IS CONFUSING ME ????
+
+- If the model is trained via **state-value based learning V(s)** then the agent will need to perform a calculation for each action at each step using known transition probabilities
+
+  - Agent estimates how good each **state** is on average
+  - To pick an action it must calculate Q(s,a) = P(r + gammaV)
+  - Then it can choose an action based on max[Q(s,a)]
+
+- If the model is trained via **action-value based learning Q(s,a)** then the agent simply needs to choose
+  - Agent estimates how good each action in a state is (expected return)
+  - Agent simply chooses action based on max[Q(s,a)] -- no calculation of action values needed
+
+## Value Iteration Method
+
+`value iteration` - allows us to numerically calculate the values of the states and values of the actions of `Markov decision processes (MDPs)` with known transition probabilities and rewards.
+
+1. Initialize the values of all states, V_i, to some initial value (usually zero)
+2. For every state, s, in the MDP, perform the Bellman update:
+
+$$
+V_s <- \text{max} \sum{p_{a,s->s'}(r_{s,a,s'} + \gamma \,V_{s'}}
+$$
+
+## Q-iteration for Frozen Lake
